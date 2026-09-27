@@ -1,0 +1,14 @@
+{
+  "domain": "rejseplanen_live",
+  "name": "Rejseplanen Live",
+  "after_dependencies": ["frontend"],
+  "codeowners": ["@TheRealBatBro"],
+  "config_flow": true,
+  "dependencies": ["http"],
+  "documentation": "https://github.com/TheRealBatBro/Home-Assistant-Rejseplanen",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/TheRealBatBro/Home-Assistant-Rejseplanen/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

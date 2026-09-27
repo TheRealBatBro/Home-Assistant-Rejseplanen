@@ -1,0 +1,547 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Rejseplanen API key",
+        "description": "Enter your Rejseplanen API 2.0 access key. It is free for non-commercial use (50,000 calls a month); request one at {labs_url}.",
+        "data": {
+          "api_key": "API key"
+        }
+      },
+      "reauth_confirm": {
+        "title": "New API key",
+        "description": "Rejseplanen rejected the key. Enter a valid one.",
+        "data": {
+          "api_key": "API key"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "The API key was rejected.",
+      "cannot_connect": "Could not reach Rejseplanen."
+    },
+    "abort": {
+      "already_configured": "This key is already added.",
+      "reauth_successful": "The key was updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "API budget",
+        "description": "Updates are spread over the month so the key stays within its quota.",
+        "data": {
+          "monthly_quota": "Calls per month",
+          "min_interval": "Fastest update interval",
+          "language": "Language of texts from Rejseplanen"
+        }
+      }
+    }
+  },
+  "config_subentries": {
+    "station": {
+      "entry_type": "Station board",
+      "initiate_flow": {
+        "user": "Add station board",
+        "reconfigure": "Change station board"
+      },
+      "step": {
+        "user": {
+          "title": "Find stop",
+          "description": "Search by name, or leave empty to list stops near your home.",
+          "data": {
+            "query": "Stop or station"
+          }
+        },
+        "pick": {
+          "title": "Choose stop",
+          "data": {
+            "stop_id": "Stop"
+          }
+        },
+        "settings": {
+          "title": "Board settings",
+          "description": "{stop}",
+          "data": {
+            "board": "Board",
+            "products": "Transport types (empty = all)",
+            "lines": "Only these lines (comma separated, e.g. A, Re, 350S)",
+            "direction": "Only journeys towards/via stop",
+            "duration": "Look ahead",
+            "max_departures": "Departures to show",
+            "walk_minutes": "Walking time to the stop",
+            "delay_threshold": "Count as delayed from",
+            "hide_cancelled": "Hide cancelled departures",
+            "station_messages": "Fetch traffic messages for the stop",
+            "track_journey": "Track the next vehicle live (1 extra call per update)"
+          },
+          "data_description": {
+            "walk_minutes": "Departures you cannot reach in time are skipped.",
+            "direction": "A stop name, e.g. København H. Leave empty for all directions.",
+            "track_journey": "Adds a map tracker and a sensor showing where the train is now."
+          },
+          "sections": {
+            "schedule": {
+              "name": "Active hours",
+              "description": "Poll only when you need it: the saved API calls make updates faster in these hours. Same start and end = all day.",
+              "data": {
+                "active_start": "From",
+                "active_end": "To",
+                "active_days": "Days",
+                "idle_interval": "Update outside active hours every (0 = never)"
+              }
+            }
+          }
+        },
+        "reconfigure": {
+          "title": "Board settings",
+          "description": "{stop}",
+          "data": {
+            "board": "Board",
+            "products": "Transport types (empty = all)",
+            "lines": "Only these lines (comma separated, e.g. A, Re, 350S)",
+            "direction": "Only journeys towards/via stop",
+            "duration": "Look ahead",
+            "max_departures": "Departures to show",
+            "walk_minutes": "Walking time to the stop",
+            "delay_threshold": "Count as delayed from",
+            "hide_cancelled": "Hide cancelled departures",
+            "station_messages": "Fetch traffic messages for the stop",
+            "track_journey": "Track the next vehicle live (1 extra call per update)"
+          },
+          "data_description": {
+            "walk_minutes": "Departures you cannot reach in time are skipped.",
+            "direction": "A stop name, e.g. København H. Leave empty for all directions.",
+            "track_journey": "Adds a map tracker and a sensor showing where the train is now."
+          },
+          "sections": {
+            "schedule": {
+              "name": "Active hours",
+              "description": "Poll only when you need it: the saved API calls make updates faster in these hours. Same start and end = all day.",
+              "data": {
+                "active_start": "From",
+                "active_end": "To",
+                "active_days": "Days",
+                "idle_interval": "Update outside active hours every (0 = never)"
+              }
+            }
+          }
+        }
+      },
+      "error": {
+        "cannot_connect": "Could not reach Rejseplanen.",
+        "no_stops": "No stops found.",
+        "direction_not_found": "No stop with that name."
+      },
+      "abort": {
+        "entry_not_loaded": "Rejseplanen Live is not loaded; check the API key.",
+        "reconfigure_successful": "Saved."
+      }
+    },
+    "trip": {
+      "entry_type": "Trip",
+      "initiate_flow": {
+        "user": "Add trip",
+        "reconfigure": "Change trip"
+      },
+      "step": {
+        "user": {
+          "title": "From and to",
+          "description": "Search for the stops you travel between.",
+          "data": {
+            "origin_query": "From",
+            "destination_query": "To"
+          }
+        },
+        "pick": {
+          "title": "Choose stops",
+          "data": {
+            "origin_id": "From",
+            "destination_id": "To"
+          }
+        },
+        "settings": {
+          "title": "Trip settings",
+          "description": "{origin} → {destination}",
+          "data": {
+            "products": "Transport types (empty = all)",
+            "max_changes": "Max changes",
+            "num_trips": "Connections to fetch",
+            "walk_minutes": "Walking time to the first stop",
+            "delay_threshold": "Count as delayed from",
+            "track_journey": "Track the first train live (1 extra call per update)"
+          },
+          "data_description": {
+            "walk_minutes": "Trips are searched from now + walking time; a 'Leave by' sensor tells you when to go."
+          },
+          "sections": {
+            "schedule": {
+              "name": "Active hours",
+              "description": "Poll only when you need it: the saved API calls make updates faster in these hours. Same start and end = all day.",
+              "data": {
+                "active_start": "From",
+                "active_end": "To",
+                "active_days": "Days",
+                "idle_interval": "Update outside active hours every (0 = never)"
+              }
+            }
+          }
+        },
+        "reconfigure": {
+          "title": "Trip settings",
+          "description": "{origin} → {destination}",
+          "data": {
+            "products": "Transport types (empty = all)",
+            "max_changes": "Max changes",
+            "num_trips": "Connections to fetch",
+            "walk_minutes": "Walking time to the first stop",
+            "delay_threshold": "Count as delayed from",
+            "track_journey": "Track the first train live (1 extra call per update)"
+          },
+          "data_description": {
+            "walk_minutes": "Trips are searched from now + walking time; a 'Leave by' sensor tells you when to go."
+          },
+          "sections": {
+            "schedule": {
+              "name": "Active hours",
+              "description": "Poll only when you need it: the saved API calls make updates faster in these hours. Same start and end = all day.",
+              "data": {
+                "active_start": "From",
+                "active_end": "To",
+                "active_days": "Days",
+                "idle_interval": "Update outside active hours every (0 = never)"
+              }
+            }
+          }
+        }
+      },
+      "error": {
+        "cannot_connect": "Could not reach Rejseplanen.",
+        "no_stops": "No stops found.",
+        "same_stop": "From and to must differ."
+      },
+      "abort": {
+        "entry_not_loaded": "Rejseplanen Live is not loaded; check the API key.",
+        "reconfigure_successful": "Saved.",
+        "already_configured": "This trip already exists."
+      }
+    }
+  },
+  "selector": {
+    "product": {
+      "options": {
+        "ic": "InterCity",
+        "lyn": "InterCity Lyn",
+        "regional": "Regional train",
+        "other_train": "Other trains (Øresund, local lines…)",
+        "s_train": "S-train",
+        "bus": "Bus",
+        "express_bus": "Express bus (S/E-bus)",
+        "night_bus": "Night bus",
+        "flex_bus": "Flex bus / Telebus",
+        "ferry": "Ferry",
+        "metro": "Metro",
+        "light_rail": "Light rail (Letbane)",
+        "flight": "Flight"
+      }
+    },
+    "weekday": {
+      "options": {
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday",
+        "sun": "Sunday"
+      }
+    },
+    "board": {
+      "options": {
+        "departures": "Departures",
+        "arrivals": "Arrivals"
+      }
+    },
+    "language": {
+      "options": {
+        "da": "Danish",
+        "en": "English"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "next_departure": {
+        "name": "Next departure"
+      },
+      "second_departure": {
+        "name": "Following departure"
+      },
+      "minutes_until": {
+        "name": "Minutes until departure"
+      },
+      "next_line": {
+        "name": "Line"
+      },
+      "next_direction": {
+        "name": "Direction"
+      },
+      "next_delay": {
+        "name": "Delay"
+      },
+      "next_track": {
+        "name": "Track"
+      },
+      "status": {
+        "name": "Status",
+        "state": {
+          "on_time": "On time",
+          "delayed": "Delayed",
+          "cancelled": "Cancelled",
+          "connection_at_risk": "Connection at risk",
+          "disrupted": "Disrupted",
+          "no_departures": "No departures"
+        }
+      },
+      "delayed": {
+        "name": "Delayed departures"
+      },
+      "cancelled": {
+        "name": "Cancelled departures"
+      },
+      "messages": {
+        "name": "Traffic messages"
+      },
+      "train_position": {
+        "name": "Vehicle position"
+      },
+      "trip_departure": {
+        "name": "Departure"
+      },
+      "trip_arrival": {
+        "name": "Arrival"
+      },
+      "leave_by": {
+        "name": "Leave by"
+      },
+      "trip_duration": {
+        "name": "Travel time"
+      },
+      "changes": {
+        "name": "Changes"
+      },
+      "departure_delay": {
+        "name": "Departure delay"
+      },
+      "arrival_delay": {
+        "name": "Arrival delay"
+      },
+      "calls_month": {
+        "name": "API calls this month"
+      },
+      "calls_today": {
+        "name": "API calls today"
+      },
+      "calls_remaining": {
+        "name": "API calls left this month"
+      },
+      "calls_projected": {
+        "name": "API calls projected this month"
+      },
+      "poll_interval": {
+        "name": "Update interval"
+      }
+    },
+    "binary_sensor": {
+      "problem": {
+        "name": "Problem"
+      }
+    },
+    "event": {
+      "board_event": {
+        "name": "Traffic event",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "departed": "Departed",
+              "arrived": "Arrived",
+              "delayed": "Delayed",
+              "cancelled": "Cancelled",
+              "track_changed": "Track changed",
+              "disruption": "New disruption",
+              "connection_at_risk": "Connection at risk"
+            }
+          }
+        }
+      }
+    },
+    "device_tracker": {
+      "vehicle": {
+        "name": "Vehicle"
+      }
+    }
+  },
+  "exceptions": {
+    "auth_failed": {
+      "message": "Rejseplanen rejected the API key."
+    },
+    "quota_exceeded": {
+      "message": "The API key's call quota is used up."
+    },
+    "update_failed": {
+      "message": "Could not update from Rejseplanen: {error}"
+    },
+    "not_loaded": {
+      "message": "No Rejseplanen Live entry is loaded."
+    },
+    "stop_not_found": {
+      "message": "No stop matches \"{stop}\"."
+    }
+  },
+  "services": {
+    "search_stops": {
+      "name": "Search stops",
+      "description": "Find stops by name, or near a position (default: home).",
+      "fields": {
+        "config_entry_id": {
+          "name": "Entry",
+          "description": "Which API key to use (optional)."
+        },
+        "query": {
+          "name": "Name",
+          "description": "Stop name; leave empty to search by position."
+        },
+        "latitude": {
+          "name": "Latitude",
+          "description": "Defaults to home."
+        },
+        "longitude": {
+          "name": "Longitude",
+          "description": "Defaults to home."
+        },
+        "radius": {
+          "name": "Radius",
+          "description": "Search radius."
+        },
+        "limit": {
+          "name": "Results",
+          "description": "Maximum number of stops."
+        }
+      }
+    },
+    "get_departures": {
+      "name": "Get departures",
+      "description": "Departure or arrival board for any stop, with delays, tracks and cancellations.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Entry",
+          "description": "Which API key to use (optional)."
+        },
+        "stop": {
+          "name": "Stop",
+          "description": "Stop id or name."
+        },
+        "arrivals": {
+          "name": "Arrivals",
+          "description": "Arrival board instead of departures."
+        },
+        "time": {
+          "name": "From",
+          "description": "Start time (default now)."
+        },
+        "duration": {
+          "name": "Duration",
+          "description": "Minutes to cover."
+        },
+        "max_results": {
+          "name": "Max results",
+          "description": "Maximum rows."
+        },
+        "products": {
+          "name": "Transport types",
+          "description": "Only these types."
+        },
+        "lines": {
+          "name": "Lines",
+          "description": "Only these lines."
+        }
+      }
+    },
+    "plan_trip": {
+      "name": "Plan trip",
+      "description": "Travel suggestions between two stops with realtime delays.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Entry",
+          "description": "Which API key to use (optional)."
+        },
+        "origin": {
+          "name": "From",
+          "description": "Stop id or name."
+        },
+        "destination": {
+          "name": "To",
+          "description": "Stop id or name."
+        },
+        "time": {
+          "name": "Time",
+          "description": "Departure (or arrival) time, default now."
+        },
+        "arrive_by": {
+          "name": "Arrive by",
+          "description": "Treat the time as arrival time."
+        },
+        "results": {
+          "name": "Results",
+          "description": "Number of suggestions."
+        },
+        "max_changes": {
+          "name": "Max changes",
+          "description": "Maximum number of changes."
+        },
+        "products": {
+          "name": "Transport types",
+          "description": "Only these types."
+        }
+      }
+    },
+    "get_journey": {
+      "name": "Get journey",
+      "description": "All stops of a train or bus, with realtime times and its current position.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Entry",
+          "description": "Which API key to use (optional)."
+        },
+        "journey_ref": {
+          "name": "Journey reference",
+          "description": "The journey_ref of a departure."
+        }
+      }
+    },
+    "get_messages": {
+      "name": "Get traffic messages",
+      "description": "Current disruptions and works affecting a stop.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Entry",
+          "description": "Which API key to use (optional)."
+        },
+        "stop": {
+          "name": "Stop",
+          "description": "Stop id or name."
+        }
+      }
+    },
+    "refresh": {
+      "name": "Refresh",
+      "description": "Update all boards and trips now (uses API calls).",
+      "fields": {
+        "config_entry_id": {
+          "name": "Entry",
+          "description": "Which API key to use (optional)."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Synthetic trip response shaped after rest.xsd (TripList/Trip/LegList/Leg). -->
+<TripList xmlns="http://hacon.de/hafas/proxy/hafas-proxy" serverVersion="2.49.1" dialectVersion="2.45-Rejseplanen" requestId="test-trip">
+  <Trip idx="0" tripId="C-0" ctxRecon="ctx0" duration="PT23M" rtDuration="PT25M" transferCount="0">
+    <LegList>
+      <Leg idx="0" name="IC 50141" type="JNY" direction="Østerport St." duration="PT23M" reachable="true">
+        <Origin name="Roskilde St." type="ST" extId="8600617" time="11:13:00" date="2025-05-23" track="3" rtTime="11:15:00" rtDate="2025-05-23" rtTrack="3"/>
+        <Destination name="København H" type="ST" extId="8600626" time="11:36:00" date="2025-05-23" track="5" rtTime="11:40:00" rtDate="2025-05-23" rtTrack="5"/>
+        <Notes>
+          <Note key="FR" type="A" priority="99" txtN="Cykelmedtagning gratis">Cykelmedtagning gratis</Note>
+          <Note key="CT" type="I" txtN="50ae30">50ae30</Note>
+        </Notes>
+        <JourneyDetailRef ref="2|#VN#1#ST#1747907666#PI#0#ZI#1#TA#0#DA#230525#ZE#50141#"/>
+        <JourneyStatus>P</JourneyStatus>
+        <Product name="IC 50141" displayNumber="50141" num="50141" catOut="IC" catOutL="IC" cls="1" operator="DSB" operatorCode="DSB"/>
+      </Leg>
+    </LegList>
+  </Trip>
+  <Trip idx="1" tripId="C-1" ctxRecon="ctx1" duration="PT34M" transferCount="1">
+    <LegList>
+      <Leg idx="0" name="Re 52522" type="JNY" direction="Helsingør St." duration="PT20M" reachable="false">
+        <Origin name="Roskilde St." type="ST" extId="8600617" time="11:21:00" date="2025-05-23" track="5" rtTrack="5"/>
+        <Destination name="Valby St." type="ST" extId="8600624" time="11:41:00" date="2025-05-23" track="2" rtTime="11:47:00" rtDate="2025-05-23" rtTrack="2"/>
+        <Messages>
+          <Message id="HIM_FREETEXT_1" act="true" head="Sporarbejde" lead="Forventet forsinkelse" text="Sporarbejde mellem Roskilde og Valby giver forsinkelser på op til 10 min." priority="50" category="1" company="DSB" sDate="2025-05-20" sTime="04:00:00" eDate="2025-05-30" eTime="23:59:00"/>
+        </Messages>
+        <JourneyDetailRef ref="2|#VN#1#ST#1747907666#PI#0#ZI#2#TA#0#DA#230525#ZE#52522#"/>
+        <Product name="Re 52522" displayNumber="52522" num="52522" catOut="Re" catOutL="Re" cls="4" operator="DSB"/>
+      </Leg>
+      <Leg idx="1" name="Skift" type="TRSF" duration="PT3M">
+        <Origin name="Valby St." type="ST" extId="8600624" time="11:41:00" date="2025-05-23"/>
+        <Destination name="Valby St." type="ST" extId="8600624" time="11:44:00" date="2025-05-23"/>
+      </Leg>
+      <Leg idx="2" name="Bx" type="JNY" direction="København H" duration="PT11M">
+        <Origin name="Valby St." type="ST" extId="8600624" time="11:44:00" date="2025-05-23" track="3"/>
+        <Destination name="København H" type="ST" extId="8600626" time="11:55:00" date="2025-05-23" track="10"/>
+        <JourneyDetailRef ref="2|#VN#1#ST#1747907666#PI#0#ZI#3#TA#0#DA#230525#ZE#Bx#"/>
+        <Product name="S-tog Bx" line="Bx" displayNumber="Bx" catOut="S-tog" catOutL="S-tog" cls="16" operator="DSB S-tog"/>
+      </Leg>
+    </LegList>
+  </Trip>
+  <Trip idx="2" tripId="C-2" duration="PT23M" transferCount="0">
+    <LegList>
+      <Leg idx="0" name="Re 51524" type="JNY" direction="København H" duration="PT23M" cancelled="true">
+        <Origin name="Roskilde St." type="ST" extId="8600617" time="11:39:00" date="2025-05-23" track="5" cancelled="true"/>
+        <Destination name="København H" type="ST" extId="8600626" time="12:02:00" date="2025-05-23" track="7" cancelled="true"/>
+        <JourneyDetailRef ref="2|#VN#1#ST#1747907666#PI#0#ZI#4#TA#0#DA#230525#ZE#51524#"/>
+        <Product name="Re 51524" displayNumber="51524" num="51524" catOut="Re" catOutL="Re" cls="4" operator="DSB"/>
+      </Leg>
+    </LegList>
+  </Trip>
+</TripList>

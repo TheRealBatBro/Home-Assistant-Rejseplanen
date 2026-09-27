@@ -1,0 +1,7 @@
+Rejseplanen Live was written from scratch in 2026 by TheRealBatBro.
+
+tests/fixtures/departure_board_roskilde.xml and tests/fixtures/location_roskilde.xml
+are real Rejseplanen API responses taken from the test data of pyRejseplan
+(https://github.com/Jawar19/pyRejseplan), MIT License, copyright (c) 2024 Jawar19.
+
+Transport data comes from Rejseplanen (https://labs.rejseplanen.dk/).

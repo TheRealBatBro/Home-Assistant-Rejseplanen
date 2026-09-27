@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Synthetic himsearch response shaped after rest.xsd (HimMessages/Message). -->
+<HimMessages xmlns="http://hacon.de/hafas/proxy/hafas-proxy" serverVersion="2.49.1" dialectVersion="2.45-Rejseplanen" requestId="test-him">
+  <Message id="HIM_FREETEXT_42" act="true" head="Signalfejl ved Høje Taastrup" lead="Færre tog og forsinkelser" text="På grund af signalfejl ved Høje Taastrup kører der færre tog mellem Roskilde og København H." priority="10" category="2" company="Banedanmark" sDate="2025-05-23" sTime="09:30:00" eDate="2025-05-23" eTime="14:00:00">
+    <affectedStops>
+      <StopLocation name="Roskilde St." extId="8600617"/>
+      <StopLocation name="Høje Taastrup St." extId="8600703"/>
+    </affectedStops>
+  </Message>
+  <Message id="HIM_FREETEXT_7" act="false" head="Afsluttet sporarbejde" text="Gammelt." sDate="2025-05-01" sTime="00:00:00" eDate="2025-05-02" eTime="00:00:00"/>
+</HimMessages>

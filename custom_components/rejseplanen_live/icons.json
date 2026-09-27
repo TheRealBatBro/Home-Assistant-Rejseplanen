@@ -1,0 +1,50 @@
+{
+  "entity": {
+    "sensor": {
+      "next_departure": { "default": "mdi:train" },
+      "second_departure": { "default": "mdi:train-variant" },
+      "minutes_until": { "default": "mdi:timer-sand" },
+      "next_line": { "default": "mdi:tag" },
+      "next_direction": { "default": "mdi:sign-direction" },
+      "next_delay": { "default": "mdi:clock-alert-outline" },
+      "next_track": { "default": "mdi:train-car-flatbed" },
+      "status": {
+        "default": "mdi:check-circle-outline",
+        "state": {
+          "delayed": "mdi:clock-alert",
+          "cancelled": "mdi:cancel",
+          "connection_at_risk": "mdi:link-variant-off",
+          "disrupted": "mdi:alert",
+          "no_departures": "mdi:sleep"
+        }
+      },
+      "delayed": { "default": "mdi:clock-alert-outline" },
+      "cancelled": { "default": "mdi:cancel" },
+      "messages": { "default": "mdi:message-alert-outline" },
+      "train_position": { "default": "mdi:map-marker-path" },
+      "trip_departure": { "default": "mdi:ray-start-arrow" },
+      "trip_arrival": { "default": "mdi:ray-end" },
+      "leave_by": { "default": "mdi:walk" },
+      "trip_duration": { "default": "mdi:timer-outline" },
+      "changes": { "default": "mdi:swap-horizontal" },
+      "departure_delay": { "default": "mdi:clock-start" },
+      "arrival_delay": { "default": "mdi:clock-end" },
+      "calls_month": { "default": "mdi:api" },
+      "calls_today": { "default": "mdi:api" },
+      "calls_remaining": { "default": "mdi:gauge" },
+      "calls_projected": { "default": "mdi:chart-line" },
+      "poll_interval": { "default": "mdi:timer-refresh-outline" }
+    },
+    "binary_sensor": { "problem": { "default": "mdi:train", "state": { "on": "mdi:alert-octagon" } } },
+    "event": { "board_event": { "default": "mdi:bell-ring-outline" } },
+    "device_tracker": { "vehicle": { "default": "mdi:train" } }
+  },
+  "services": {
+    "search_stops": { "service": "mdi:map-search" },
+    "get_departures": { "service": "mdi:clipboard-list-outline" },
+    "plan_trip": { "service": "mdi:routes" },
+    "get_journey": { "service": "mdi:map-marker-path" },
+    "get_messages": { "service": "mdi:message-alert-outline" },
+    "refresh": { "service": "mdi:refresh" }
+  }
+}

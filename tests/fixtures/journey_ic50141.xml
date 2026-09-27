@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Synthetic journeyDetail response shaped after rest.xsd. -->
+<JourneyDetail xmlns="http://hacon.de/hafas/proxy/hafas-proxy" serverVersion="2.49.1" dialectVersion="2.45-Rejseplanen" requestId="test-jd" dayOfOperation="2025-05-23">
+  <Stops>
+    <Stop name="Fredericia St." extId="8600079" routeIdx="0" lon="9.742" lat="55.566" depTime="09:05:00" depDate="2025-05-23" depTrack="2" rtDepTime="09:06:00" rtDepDate="2025-05-23"/>
+    <Stop name="Odense St." extId="8600512" routeIdx="5" lon="10.386" lat="55.401" arrTime="09:45:00" arrDate="2025-05-23" depTime="09:47:00" depDate="2025-05-23" rtArrTime="09:46:00" rtArrDate="2025-05-23" rtDepTime="09:48:00" rtDepDate="2025-05-23" depTrack="3"/>
+    <Stop name="Ringsted St." extId="8600803" routeIdx="15" lon="11.787" lat="55.442" arrTime="10:55:00" arrDate="2025-05-23" depTime="10:56:00" depDate="2025-05-23" rtArrTime="10:57:00" rtArrDate="2025-05-23" rtDepTime="10:58:00" rtDepDate="2025-05-23"/>
+    <Stop name="Roskilde St." extId="8600617" routeIdx="19" lon="12.08855" lat="55.639093" arrTime="11:12:00" arrDate="2025-05-23" depTime="11:13:00" depDate="2025-05-23" rtArrTime="11:14:00" rtArrDate="2025-05-23" rtDepTime="11:15:00" rtDepDate="2025-05-23" depTrack="3" rtDepTrack="3"/>
+    <Stop name="København H" extId="8600626" routeIdx="22" lon="12.56459" lat="55.672681" arrTime="11:36:00" arrDate="2025-05-23" rtArrTime="11:40:00" rtArrDate="2025-05-23" arrTrack="5"/>
+  </Stops>
+  <Product name="IC 50141" displayNumber="50141" num="50141" catOut="IC" catOutL="IC" cls="1" operator="DSB"/>
+  <Directions>
+    <Direction>Østerport St.</Direction>
+  </Directions>
+  <lastPos lon="11.95" lat="55.55"/>
+  <lastPosReported>2025-05-23T11:04:30+02:00</lastPosReported>
+  <rtLastPassStopRef>2</rtLastPassStopRef>
+</JourneyDetail>

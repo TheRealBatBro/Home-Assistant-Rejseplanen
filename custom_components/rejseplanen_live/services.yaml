@@ -1,0 +1,141 @@
+search_stops:
+  fields:
+    config_entry_id: &entry
+      selector:
+        config_entry:
+          integration: rejseplanen_live
+    query:
+      example: "Frederikssund St."
+      selector:
+        text:
+    latitude:
+      selector:
+        number:
+          min: -90
+          max: 90
+          step: any
+    longitude:
+      selector:
+        number:
+          min: -180
+          max: 180
+          step: any
+    radius:
+      default: 1500
+      selector:
+        number:
+          min: 100
+          max: 10000
+          unit_of_measurement: m
+    limit:
+      default: 10
+      selector:
+        number:
+          min: 1
+          max: 50
+
+get_departures:
+  fields:
+    config_entry_id: *entry
+    stop:
+      required: true
+      example: "København H"
+      selector:
+        text:
+    arrivals:
+      default: false
+      selector:
+        boolean:
+    time:
+      selector:
+        datetime:
+    duration:
+      default: 60
+      selector:
+        number:
+          min: 1
+          max: 1440
+          unit_of_measurement: min
+    max_results:
+      selector:
+        number:
+          min: 1
+          max: 200
+    products: &products
+      selector:
+        select:
+          multiple: true
+          translation_key: product
+          options:
+            - ic
+            - lyn
+            - regional
+            - other_train
+            - s_train
+            - bus
+            - express_bus
+            - night_bus
+            - flex_bus
+            - ferry
+            - metro
+            - light_rail
+            - flight
+    lines:
+      example: "A, 350S"
+      selector:
+        text:
+          multiple: true
+
+plan_trip:
+  fields:
+    config_entry_id: *entry
+    origin:
+      required: true
+      example: "Frederikssund St."
+      selector:
+        text:
+    destination:
+      required: true
+      example: "København H"
+      selector:
+        text:
+    time:
+      selector:
+        datetime:
+    arrive_by:
+      default: false
+      selector:
+        boolean:
+    results:
+      default: 4
+      selector:
+        number:
+          min: 1
+          max: 10
+    max_changes:
+      selector:
+        number:
+          min: 0
+          max: 10
+    products: *products
+
+get_journey:
+  fields:
+    config_entry_id: *entry
+    journey_ref:
+      required: true
+      selector:
+        text:
+
+get_messages:
+  fields:
+    config_entry_id: *entry
+    stop:
+      required: true
+      example: "Roskilde St."
+      selector:
+        text:
+
+refresh:
+  fields:
+    config_entry_id: *entry

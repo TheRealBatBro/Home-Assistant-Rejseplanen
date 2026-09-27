@@ -1,0 +1,547 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Rejseplanen API-nøgle",
+        "description": "Indtast din adgangsnøgle til Rejseplanens API 2.0. Den er gratis til ikke-kommerciel brug (50.000 kald om måneden); søg om den på {labs_url}.",
+        "data": {
+          "api_key": "API-nøgle"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Ny API-nøgle",
+        "description": "Rejseplanen afviste nøglen. Indtast en gyldig nøgle.",
+        "data": {
+          "api_key": "API-nøgle"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "API-nøglen blev afvist.",
+      "cannot_connect": "Kunne ikke få forbindelse til Rejseplanen."
+    },
+    "abort": {
+      "already_configured": "Denne nøgle er allerede tilføjet.",
+      "reauth_successful": "Nøglen er opdateret."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "API-budget",
+        "description": "Opdateringer fordeles over måneden, så nøglen holder sig inden for kvoten.",
+        "data": {
+          "monthly_quota": "Kald pr. måned",
+          "min_interval": "Hurtigste opdateringsinterval",
+          "language": "Sprog for tekster fra Rejseplanen"
+        }
+      }
+    }
+  },
+  "config_subentries": {
+    "station": {
+      "entry_type": "Stationstavle",
+      "initiate_flow": {
+        "user": "Tilføj stationstavle",
+        "reconfigure": "Redigér stationstavle"
+      },
+      "step": {
+        "user": {
+          "title": "Find stoppested",
+          "description": "Søg på navn, eller lad feltet stå tomt for stoppesteder nær dit hjem.",
+          "data": {
+            "query": "Stoppested eller station"
+          }
+        },
+        "pick": {
+          "title": "Vælg stoppested",
+          "data": {
+            "stop_id": "Stoppested"
+          }
+        },
+        "settings": {
+          "title": "Tavleindstillinger",
+          "description": "{stop}",
+          "data": {
+            "board": "Tavle",
+            "products": "Transportmidler (tom = alle)",
+            "lines": "Kun disse linjer (kommasepareret, fx A, Re, 350S)",
+            "direction": "Kun afgange mod/via stop",
+            "duration": "Se frem",
+            "max_departures": "Antal afgange",
+            "walk_minutes": "Gåtid til stoppestedet",
+            "delay_threshold": "Regnes som forsinket fra",
+            "hide_cancelled": "Skjul aflyste afgange",
+            "station_messages": "Hent trafikinformation for stoppestedet",
+            "track_journey": "Følg næste tog/bus live (1 ekstra kald pr. opdatering)"
+          },
+          "data_description": {
+            "walk_minutes": "Afgange du ikke kan nå, springes over.",
+            "direction": "Et stopnavn, fx København H. Tom = alle retninger.",
+            "track_journey": "Tilføjer en kort-tracker og en sensor, der viser hvor toget er nu."
+          },
+          "sections": {
+            "schedule": {
+              "name": "Aktive tidspunkter",
+              "description": "Hent kun data, når du har brug for det: de sparede API-kald giver hyppigere opdatering i disse timer. Samme start og slut = hele døgnet.",
+              "data": {
+                "active_start": "Fra",
+                "active_end": "Til",
+                "active_days": "Dage",
+                "idle_interval": "Opdatér uden for aktive tidspunkter hvert (0 = aldrig)"
+              }
+            }
+          }
+        },
+        "reconfigure": {
+          "title": "Tavleindstillinger",
+          "description": "{stop}",
+          "data": {
+            "board": "Tavle",
+            "products": "Transportmidler (tom = alle)",
+            "lines": "Kun disse linjer (kommasepareret, fx A, Re, 350S)",
+            "direction": "Kun afgange mod/via stop",
+            "duration": "Se frem",
+            "max_departures": "Antal afgange",
+            "walk_minutes": "Gåtid til stoppestedet",
+            "delay_threshold": "Regnes som forsinket fra",
+            "hide_cancelled": "Skjul aflyste afgange",
+            "station_messages": "Hent trafikinformation for stoppestedet",
+            "track_journey": "Følg næste tog/bus live (1 ekstra kald pr. opdatering)"
+          },
+          "data_description": {
+            "walk_minutes": "Afgange du ikke kan nå, springes over.",
+            "direction": "Et stopnavn, fx København H. Tom = alle retninger.",
+            "track_journey": "Tilføjer en kort-tracker og en sensor, der viser hvor toget er nu."
+          },
+          "sections": {
+            "schedule": {
+              "name": "Aktive tidspunkter",
+              "description": "Hent kun data, når du har brug for det: de sparede API-kald giver hyppigere opdatering i disse timer. Samme start og slut = hele døgnet.",
+              "data": {
+                "active_start": "Fra",
+                "active_end": "Til",
+                "active_days": "Dage",
+                "idle_interval": "Opdatér uden for aktive tidspunkter hvert (0 = aldrig)"
+              }
+            }
+          }
+        }
+      },
+      "error": {
+        "cannot_connect": "Kunne ikke få forbindelse til Rejseplanen.",
+        "no_stops": "Ingen stoppesteder fundet.",
+        "direction_not_found": "Intet stoppested med det navn."
+      },
+      "abort": {
+        "entry_not_loaded": "Rejseplanen Live er ikke indlæst; kontrollér API-nøglen.",
+        "reconfigure_successful": "Gemt."
+      }
+    },
+    "trip": {
+      "entry_type": "Rejse",
+      "initiate_flow": {
+        "user": "Tilføj rejse",
+        "reconfigure": "Redigér rejse"
+      },
+      "step": {
+        "user": {
+          "title": "Fra og til",
+          "description": "Søg efter de stoppesteder, du rejser mellem.",
+          "data": {
+            "origin_query": "Fra",
+            "destination_query": "Til"
+          }
+        },
+        "pick": {
+          "title": "Vælg stoppesteder",
+          "data": {
+            "origin_id": "Fra",
+            "destination_id": "Til"
+          }
+        },
+        "settings": {
+          "title": "Rejseindstillinger",
+          "description": "{origin} → {destination}",
+          "data": {
+            "products": "Transportmidler (tom = alle)",
+            "max_changes": "Maks. antal skift",
+            "num_trips": "Antal rejseforslag",
+            "walk_minutes": "Gåtid til første stop",
+            "delay_threshold": "Regnes som forsinket fra",
+            "track_journey": "Følg første tog live (1 ekstra kald pr. opdatering)"
+          },
+          "data_description": {
+            "walk_minutes": "Rejser søges fra nu + gåtid; sensoren 'Gå hjemmefra' fortæller, hvornår du skal gå."
+          },
+          "sections": {
+            "schedule": {
+              "name": "Aktive tidspunkter",
+              "description": "Hent kun data, når du har brug for det: de sparede API-kald giver hyppigere opdatering i disse timer. Samme start og slut = hele døgnet.",
+              "data": {
+                "active_start": "Fra",
+                "active_end": "Til",
+                "active_days": "Dage",
+                "idle_interval": "Opdatér uden for aktive tidspunkter hvert (0 = aldrig)"
+              }
+            }
+          }
+        },
+        "reconfigure": {
+          "title": "Rejseindstillinger",
+          "description": "{origin} → {destination}",
+          "data": {
+            "products": "Transportmidler (tom = alle)",
+            "max_changes": "Maks. antal skift",
+            "num_trips": "Antal rejseforslag",
+            "walk_minutes": "Gåtid til første stop",
+            "delay_threshold": "Regnes som forsinket fra",
+            "track_journey": "Følg første tog live (1 ekstra kald pr. opdatering)"
+          },
+          "data_description": {
+            "walk_minutes": "Rejser søges fra nu + gåtid; sensoren 'Gå hjemmefra' fortæller, hvornår du skal gå."
+          },
+          "sections": {
+            "schedule": {
+              "name": "Aktive tidspunkter",
+              "description": "Hent kun data, når du har brug for det: de sparede API-kald giver hyppigere opdatering i disse timer. Samme start og slut = hele døgnet.",
+              "data": {
+                "active_start": "Fra",
+                "active_end": "Til",
+                "active_days": "Dage",
+                "idle_interval": "Opdatér uden for aktive tidspunkter hvert (0 = aldrig)"
+              }
+            }
+          }
+        }
+      },
+      "error": {
+        "cannot_connect": "Kunne ikke få forbindelse til Rejseplanen.",
+        "no_stops": "Ingen stoppesteder fundet.",
+        "same_stop": "Fra og til skal være forskellige."
+      },
+      "abort": {
+        "entry_not_loaded": "Rejseplanen Live er ikke indlæst; kontrollér API-nøglen.",
+        "reconfigure_successful": "Gemt.",
+        "already_configured": "Denne rejse findes allerede."
+      }
+    }
+  },
+  "selector": {
+    "product": {
+      "options": {
+        "ic": "InterCity",
+        "lyn": "InterCityLyn",
+        "regional": "Regionaltog",
+        "other_train": "Øvrige tog (Øresund, lokalbaner…)",
+        "s_train": "S-tog",
+        "bus": "Bus",
+        "express_bus": "Ekspresbus (S-/E-bus)",
+        "night_bus": "Natbus",
+        "flex_bus": "Flextur / Telebus",
+        "ferry": "Færge",
+        "metro": "Metro",
+        "light_rail": "Letbane",
+        "flight": "Fly"
+      }
+    },
+    "weekday": {
+      "options": {
+        "mon": "Mandag",
+        "tue": "Tirsdag",
+        "wed": "Onsdag",
+        "thu": "Torsdag",
+        "fri": "Fredag",
+        "sat": "Lørdag",
+        "sun": "Søndag"
+      }
+    },
+    "board": {
+      "options": {
+        "departures": "Afgange",
+        "arrivals": "Ankomster"
+      }
+    },
+    "language": {
+      "options": {
+        "da": "Dansk",
+        "en": "Engelsk"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "next_departure": {
+        "name": "Næste afgang"
+      },
+      "second_departure": {
+        "name": "Efterfølgende afgang"
+      },
+      "minutes_until": {
+        "name": "Minutter til afgang"
+      },
+      "next_line": {
+        "name": "Linje"
+      },
+      "next_direction": {
+        "name": "Retning"
+      },
+      "next_delay": {
+        "name": "Forsinkelse"
+      },
+      "next_track": {
+        "name": "Spor"
+      },
+      "status": {
+        "name": "Status",
+        "state": {
+          "on_time": "Til tiden",
+          "delayed": "Forsinket",
+          "cancelled": "Aflyst",
+          "connection_at_risk": "Forbindelse i fare",
+          "disrupted": "Driftsforstyrrelse",
+          "no_departures": "Ingen afgange"
+        }
+      },
+      "delayed": {
+        "name": "Forsinkede afgange"
+      },
+      "cancelled": {
+        "name": "Aflyste afgange"
+      },
+      "messages": {
+        "name": "Trafikinformation"
+      },
+      "train_position": {
+        "name": "Togets position"
+      },
+      "trip_departure": {
+        "name": "Afgang"
+      },
+      "trip_arrival": {
+        "name": "Ankomst"
+      },
+      "leave_by": {
+        "name": "Gå hjemmefra"
+      },
+      "trip_duration": {
+        "name": "Rejsetid"
+      },
+      "changes": {
+        "name": "Skift"
+      },
+      "departure_delay": {
+        "name": "Forsinkelse ved afgang"
+      },
+      "arrival_delay": {
+        "name": "Forsinkelse ved ankomst"
+      },
+      "calls_month": {
+        "name": "API-kald denne måned"
+      },
+      "calls_today": {
+        "name": "API-kald i dag"
+      },
+      "calls_remaining": {
+        "name": "API-kald tilbage denne måned"
+      },
+      "calls_projected": {
+        "name": "Forventede API-kald denne måned"
+      },
+      "poll_interval": {
+        "name": "Opdateringsinterval"
+      }
+    },
+    "binary_sensor": {
+      "problem": {
+        "name": "Problem"
+      }
+    },
+    "event": {
+      "board_event": {
+        "name": "Trafikhændelse",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "departed": "Afgået",
+              "arrived": "Ankommet",
+              "delayed": "Forsinket",
+              "cancelled": "Aflyst",
+              "track_changed": "Sporskift",
+              "disruption": "Ny driftsforstyrrelse",
+              "connection_at_risk": "Forbindelse i fare"
+            }
+          }
+        }
+      }
+    },
+    "device_tracker": {
+      "vehicle": {
+        "name": "Tog"
+      }
+    }
+  },
+  "exceptions": {
+    "auth_failed": {
+      "message": "Rejseplanen afviste API-nøglen."
+    },
+    "quota_exceeded": {
+      "message": "API-nøglens kvote er brugt op."
+    },
+    "update_failed": {
+      "message": "Kunne ikke opdatere fra Rejseplanen: {error}"
+    },
+    "not_loaded": {
+      "message": "Ingen Rejseplanen Live-opsætning er indlæst."
+    },
+    "stop_not_found": {
+      "message": "Intet stoppested matcher \"{stop}\"."
+    }
+  },
+  "services": {
+    "search_stops": {
+      "name": "Søg stoppesteder",
+      "description": "Find stoppesteder efter navn eller nær en position (standard: hjem).",
+      "fields": {
+        "config_entry_id": {
+          "name": "Opsætning",
+          "description": "Hvilken API-nøgle der bruges (valgfri)."
+        },
+        "query": {
+          "name": "Navn",
+          "description": "Stopnavn; tom = søg efter position."
+        },
+        "latitude": {
+          "name": "Breddegrad",
+          "description": "Standard er hjem."
+        },
+        "longitude": {
+          "name": "Længdegrad",
+          "description": "Standard er hjem."
+        },
+        "radius": {
+          "name": "Radius",
+          "description": "Søgeradius."
+        },
+        "limit": {
+          "name": "Resultater",
+          "description": "Maks. antal stoppesteder."
+        }
+      }
+    },
+    "get_departures": {
+      "name": "Hent afgange",
+      "description": "Afgangs- eller ankomsttavle for et vilkårligt stoppested med forsinkelser, spor og aflysninger.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Opsætning",
+          "description": "Hvilken API-nøgle der bruges (valgfri)."
+        },
+        "stop": {
+          "name": "Stoppested",
+          "description": "Stoppesteds-id eller navn."
+        },
+        "arrivals": {
+          "name": "Ankomster",
+          "description": "Ankomsttavle i stedet for afgange."
+        },
+        "time": {
+          "name": "Fra",
+          "description": "Starttidspunkt (standard nu)."
+        },
+        "duration": {
+          "name": "Varighed",
+          "description": "Antal minutter."
+        },
+        "max_results": {
+          "name": "Maks. resultater",
+          "description": "Maks. antal rækker."
+        },
+        "products": {
+          "name": "Transportmidler",
+          "description": "Kun disse typer."
+        },
+        "lines": {
+          "name": "Linjer",
+          "description": "Kun disse linjer."
+        }
+      }
+    },
+    "plan_trip": {
+      "name": "Planlæg rejse",
+      "description": "Rejseforslag mellem to stoppesteder med forsinkelser i realtid.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Opsætning",
+          "description": "Hvilken API-nøgle der bruges (valgfri)."
+        },
+        "origin": {
+          "name": "Fra",
+          "description": "Stoppesteds-id eller navn."
+        },
+        "destination": {
+          "name": "Til",
+          "description": "Stoppesteds-id eller navn."
+        },
+        "time": {
+          "name": "Tidspunkt",
+          "description": "Afgangs- (eller ankomst)tidspunkt, standard nu."
+        },
+        "arrive_by": {
+          "name": "Ankomst senest",
+          "description": "Tidspunktet er ankomsttid."
+        },
+        "results": {
+          "name": "Resultater",
+          "description": "Antal forslag."
+        },
+        "max_changes": {
+          "name": "Maks. skift",
+          "description": "Maks. antal skift."
+        },
+        "products": {
+          "name": "Transportmidler",
+          "description": "Kun disse typer."
+        }
+      }
+    },
+    "get_journey": {
+      "name": "Hent rejseforløb",
+      "description": "Alle stop for et tog eller en bus med realtidstider og nuværende position.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Opsætning",
+          "description": "Hvilken API-nøgle der bruges (valgfri)."
+        },
+        "journey_ref": {
+          "name": "Rejsereference",
+          "description": "journey_ref fra en afgang."
+        }
+      }
+    },
+    "get_messages": {
+      "name": "Hent trafikinformation",
+      "description": "Aktuelle driftsforstyrrelser og sporarbejde for et stoppested.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Opsætning",
+          "description": "Hvilken API-nøgle der bruges (valgfri)."
+        },
+        "stop": {
+          "name": "Stoppested",
+          "description": "Stoppesteds-id eller navn."
+        }
+      }
+    },
+    "refresh": {
+      "name": "Opdatér",
+      "description": "Opdatér alle tavler og rejser nu (bruger API-kald).",
+      "fields": {
+        "config_entry_id": {
+          "name": "Opsætning",
+          "description": "Hvilken API-nøgle der bruges (valgfri)."
+        }
+      }
+    }
+  }
+}
